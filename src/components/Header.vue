@@ -13,13 +13,17 @@
 				default:"QianQian左右鞋包"
 			},
 			back:{
-				type:Boolean,
-				default:false
+				type:String,
+				default:''
 			}
 		},
 		methods:{
 			toback(){
-				
+				if(this.back===''){
+					this.$router.push('/')
+				}else{
+					this.$router.push(this.back)
+				}
 			}
 		}
 	}

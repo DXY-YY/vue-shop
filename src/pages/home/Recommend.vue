@@ -1,8 +1,12 @@
 <template>
 	<div class="recommend-warpper" ref=warpper>
+		<div class="title-heard">
+			<h1>精品推荐</h1>
+			<a href="">更多<span class="iconfont">&#xe602;</span></a>
+		</div>
 		<div class="recomend-item" ref="item">
 			<div class="recomend-list" v-for="item of recommendlist" :key="item.id">
-				<img :src="item.img" alt="">
+				<img v-lazy="item.img" alt="">
 				<p class="name">{{item.name}}</p>
 				<p class="price">￥{{item.price|formatprice}}</p>
 			</div>
@@ -18,10 +22,17 @@ import { formatprice } from "../../untils/function.js"
 		props:{
 			recommendlist:Array
 		},
-		mounted() {
-			this.$nextTick(()=>{
-				this.initscroll()
-			})
+		// mounted() {
+		// 	this.$nextTick(()=>{
+		// 		this.initscroll()
+		// 	})
+		// },
+		watch:{
+			recommendlist(){
+				this.$nextTick(()=>{
+					this.initscroll()
+				})
+			}
 		},
 		filters:{
 			formatprice(price){
@@ -53,10 +64,30 @@ import { formatprice } from "../../untils/function.js"
 <style lang="scss" scoped="scoped">
 	.recommend-warpper{
 		width: 100%;
-		height: 3.5rem;
+		height: 4.2rem;
 		padding: 0.2rem;
+		.title-heard{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			h1{
+				font-size:0.32rem;
+				width: 1.8rem;
+				text-align: center;
+				border-left: 2px solid orangered;
+				margin: 0.2rem 0;
+			}
+			a{
+				font-size: 0.3rem;
+				margin: 0.2rem 0;
+				color: #AAAAAA;
+				span{
+					margin-left: 0.1rem;
+					font-size: 0.32rem;
+				}
+			}
+		}
 		.recomend-item{
-			height: 100%;
 			display: flex;
 			.recomend-list{
 				width: 1.98rem;
